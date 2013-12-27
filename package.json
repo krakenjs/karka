@@ -1,0 +1,15 @@
+{
+  "name": "Karka",
+  "version": "0.0.1",
+  "description": "A module to help with template specialization",
+  "main": "index.js",
+  "keywords": [
+    "dustjs",
+    "express",
+    "nodejs"
+  ],
+  "author": {
+    "name": "Poornima Venkatakrishnan",
+    "email": "pvenkatakrishnan@paypal.com"
+  }
+}
