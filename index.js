@@ -14,7 +14,7 @@ exports.create = function (app, config) {
         app = undefined;
     }
 
-	config.specialization = (app && app.get('specialization')) || undefined;
+	//config.specialization = (app && app.get('specialization')) || undefined;
 
 	return Object.create({
 
