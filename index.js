@@ -14,14 +14,9 @@ exports.create = function (app, config) {
         app = undefined;
     }
 
-	//config.specialization = (app && app.get('specialization')) || undefined;
-
 	return Object.create({
-
-        templateResolver: {
-            enumerable: true,
-            writable: false,
-            value: templateResolver
-        }
+        templateResolver: templateResolver
     });
 };
+
+
