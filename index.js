@@ -15,7 +15,7 @@ exports.create = function (app, config) {
     }
 
 	return Object.create({
-        templateResolver: templateResolver
+        templateResolver: templateResolver.create(config)
     });
 };
 
