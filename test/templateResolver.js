@@ -29,7 +29,7 @@ describe('karka', function () {
 					'devices': ['mobile', 'tablet', 'web']
 				},
 				context = {
-					locality: ['DE_de'],
+					locale: ['DE_de'],
 					device: 'mobile'
 				},
 				name = 'mapMe',
@@ -49,7 +49,7 @@ describe('karka', function () {
 					'devices': ['mobile', 'tablet', 'web']
 				},
 				context = {
-					locality: ['DE_de'],
+					locale: ['DE_de'],
 					device: 'mobile',
 					experiments: ['foo', 'baz']
 				},
@@ -110,7 +110,7 @@ describe('karka', function () {
 					dim: [ 'experiments', 'devices'],
 					numExp: 2
 				};
-            assert.equal(meta2, templateResolver.pickBest(meta1, meta2));
+            assert.equal(meta1, templateResolver.pickBest(meta1, meta2));
         });
     });
 
