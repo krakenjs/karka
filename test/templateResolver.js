@@ -64,16 +64,30 @@ describe('karka', function () {
     
 	});
 	describe('Resolve', function () {
-        var config , context, resolve;
+        var config,
+            context = {
+                stack: {
+                    head: {
+                        locale: 'es_US',
+                        device: 'tablet',
+                        experiments: ['foo']
+                    }
+                }
+            },
+            resolve;
 
         it('should test invoking module to rule Evaluate', function () {
-            context = {}; //we dont test context in this test
+
             config = {
                 'partialSamples/partial1' : [
                     {
                         template: 'foo/partial1',
                         module: '../test/fixtures/moduleAsRuleEvaluator',
-                        rules: {}//we dont test context in this test
+                        rules: {
+                            locale: ['en_US', 'es_US'],
+                            experiments: ['foo'],
+                            device: ['tablet']
+                        }
                     }
                 ]
             };
@@ -81,14 +95,18 @@ describe('karka', function () {
             assert.equal('foo/partial1', resolve('partialSamples/partial1', context));
         });
         it('should test invoking factory method on module to rule Evaluate', function () {
-            context = {}; //we dont test context in this test
+
             config = {
                 'partialSamples/partial1' : [
                     {
                         template: 'bar/partial1',
                         module: '../test/fixtures/factoryApiAsRuleEvaluator',
                         api: 'ruleEvaluator',
-                        rules: {}//we dont test context in this test
+                        rules: {
+                            locale: ['en_US', 'es_US'],
+                            experiments: ['foo'],
+                            device: ['tablet']
+                        }
                     }
                 ]
             };
@@ -116,15 +134,7 @@ describe('karka', function () {
                     }
                 ]
             };
-            context = {
-                stack: {
-                    head: {
-                        locale: 'es_US',
-                        device: 'tablet',
-                        experiments: ['foo']
-                    }
-                }
-            };
+
             resolve = templateResolver.create(config);
             assert.equal('bar/partial1', resolve('partialSamples/partial1', context));
         });

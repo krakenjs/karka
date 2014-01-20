@@ -7,7 +7,6 @@ function isExpress(obj) {
 }
 
 exports.create = function (app, config) {
-	console.info('entered into karka create, app:', app, ' config:', config);
 
 	if (!isExpress(app)) {
         config = app;
