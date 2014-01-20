@@ -65,51 +65,7 @@ describe('karka', function () {
 	});
 	describe('Resolve', function () {
         var config , context, resolve;
-        /*config = {
-            'partialSamples/partial1' : [
-                {
-                    template: 'foo/foo_partial1',
-                    module: '../paypal-specialization-rules/ruleImplementor',
-                    rules: {
-                        locale: ['en_US', 'es_US'],
-                        experiments: ['foo'],
-                        device: ['tablet']
-                    }
-                },
-                {
-                    template: 'blah/partial1',
-                    module: '../paypal-specialization-rules/ruleImplementor',
-                    rules: {
-                        locale: ['en_US', 'es_US'],
-                        device: ['tablet']
-                    }
 
-                }
-            ]
-        },
-        context = {
-                stack: {
-                    tail: {
-                        head: {
-                            context: {
-                                locality: {
-                                    locale: 'en_US'
-                                }
-                            },
-                            wurfl: {
-                                capabilities: {
-                                    is_tablet: true,
-                                    is_wireless: true
-                                }
-                            }
-                        }
-                    },
-                    head: {
-
-                    }
-                }
-            },
-            resolve;*/
         it('should test invoking module to rule Evaluate', function () {
             context = {}; //we dont test context in this test
             config = {
