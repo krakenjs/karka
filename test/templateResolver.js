@@ -20,11 +20,18 @@ describe('karka', function () {
             assert.equal(true, templateResolver.ruleEvaluate(config, context));
         });
 
-        it('should test for complex no match case', function () {
-            var config = ['foo', ['bar', 'blah']],
-				context = ['foo', 'blah'];
+        it('should test for match case', function () {
+            var config = ['foo'],
+				context = ['foo'];
 				
-            assert.equal(false, templateResolver.ruleEvaluate(config, context));
+            assert.equal(true, templateResolver.ruleEvaluate(config, context));
+        });
+
+        it('should test for has complex but match simple entry case', function () {
+            var config = ['foo', ['bar', 'blah']],
+                context = ['foo', 'blah'];
+                
+            assert.equal(true, templateResolver.ruleEvaluate(config, context));
         });
 
         it('should test for complex matched case', function () {
@@ -34,16 +41,23 @@ describe('karka', function () {
             assert.equal(true, templateResolver.ruleEvaluate(config, context));
         });
 
-        it('should test negative cases where config is a string (not per spec)', function () {
-            var config = 'foo',
-				context = 'blah';
-				
+        it('should test with simple no match case', function () {
+            var config = ['foo', 'bar', 'blah'],
+                context = ['blue', 'yellow'];
+                
             assert.equal(false, templateResolver.ruleEvaluate(config, context));
         });
 
-        it('should test negative cases where config is an array of strings but context has an array to compare against (not pet spec)', function () {
-            var config = ['foo', 'bar'],
-				context = ['blah', 'bar'];
+        it('should test with complex no matched case', function () {
+            var config = ['foo', ['bar', 'blah']],
+                context = ['blue', 'yellow'];
+                
+            assert.equal(false, templateResolver.ruleEvaluate(config, context));
+        });
+
+        it('should test negative cases where config is a string (not per spec)', function () {
+            var config = 'foo',
+				context = 'blah';
 				
             assert.equal(false, templateResolver.ruleEvaluate(config, context));
         });
@@ -129,9 +143,15 @@ describe('karka', function () {
             config = {
                 'partialSamples/partial1' : [
                     {
+                        template: 'bal/partial1',
+                        rules: {
+                            locale: ['de_DE'],
+                            experiments: ['foo'],
+                            device: ['tablet']
+                        }
+                    },
+                    {
                         template: 'bar/partial1',
-                        module: './fixtures/factoryApiAsRuleEvaluator',
-                        api: 'ruleEvaluator',
                         rules: {
                             locale: ['en_US', 'es_US'],
                             experiments: ['foo'],
