@@ -1,5 +1,5 @@
 'use strict';
-var templateResolver = require('./lib/templateResolver');
+var templateResolver = require('./lib/specializer');
 
 
 function isExpress(obj) {
@@ -14,7 +14,8 @@ exports.create = function (app, config) {
     }
 
 	return Object.create({
-        templateResolver: templateResolver.create(config)
+        templateResolver: specializer.templateResolve(config),
+        templateMapper: specializer.templateMap(config)
     });
 };
 
