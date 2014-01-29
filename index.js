@@ -1,5 +1,5 @@
 'use strict';
-var templateResolver = require('./lib/specializer');
+var specializer = require('./lib/specializer');
 
 
 function isExpress(obj) {
