@@ -1,6 +1,6 @@
 var specializer = require('../lib/specializer'),
-	assert = require('assert'),
-	mocha = require('mocha');
+    assert = require('assert'),
+    mocha = require('mocha');
 
 describe('karka', function () {
 
@@ -8,66 +8,66 @@ describe('karka', function () {
 
         it('should test for simple no match case', function () {
             var config = ['foo', 'bar'],
-				context = 'blah';
-				
+                context = 'blah';
+
             assert.equal(false, specializer.ruleEvaluate(config, context));
         });
 
-		it('should test for simple matched case', function () {
+        it('should test for simple matched case', function () {
             var config = ['foo', 'bar'],
-				context = 'bar';
-				
+                context = 'bar';
+
             assert.equal(true, specializer.ruleEvaluate(config, context));
         });
 
         it('should test for match case', function () {
             var config = ['foo'],
-				context = ['foo'];
-				
+                context = ['foo'];
+
             assert.equal(true, specializer.ruleEvaluate(config, context));
         });
 
         it('should test for has complex but match simple entry case', function () {
             var config = ['foo', ['bar', 'blah']],
                 context = ['foo', 'blah'];
-                
+
             assert.equal(true, specializer.ruleEvaluate(config, context));
         });
 
         it('should test for complex matched case', function () {
             var config = ['foo', ['bar', 'blah']],
-				context = ['blah', 'bar'];
-				
+                context = ['blah', 'bar'];
+
             assert.equal(true, specializer.ruleEvaluate(config, context));
         });
 
         it('should test with simple no match case', function () {
             var config = ['foo', 'bar', 'blah'],
                 context = ['blue', 'yellow'];
-                
+
             assert.equal(false, specializer.ruleEvaluate(config, context));
         });
 
         it('should test with complex no matched case', function () {
             var config = ['foo', ['bar', 'blah']],
                 context = ['blue', 'yellow'];
-                
+
             assert.equal(false, specializer.ruleEvaluate(config, context));
         });
 
         it('should test negative cases where config is a string (not per spec)', function () {
             var config = 'foo',
-				context = 'blah';
-				
+                context = 'blah';
+
             assert.equal(false, specializer.ruleEvaluate(config, context));
         });
-    
-	});
-	describe('Resolve', function () {
+
+    });
+    describe('Resolve', function () {
         var config,
             context = {
-                stack: {
-                    head: {
+                res: {
+                    locals: {
                         locale: 'es_US',
                         device: 'tablet',
                         experiments: ['foo']
@@ -136,10 +136,10 @@ describe('karka', function () {
             },
 
 
-            resolve = specializer.templateResolve(config);
+                resolve = specializer.templateResolve(config);
             assert.equal('bar/partial1', resolve('partialSamples/partial1', context));
         });
-	});
+    });
 
     describe('Map', function () {
         var map,
@@ -202,8 +202,8 @@ describe('karka', function () {
 
         it('should test returning empty map when none of the templates match', function () {
             context = {
-                stack: {
-                    head: {
+                res: {
+                    locals: {
                         locale: 'en_AU',
                         device: 'tablet',
                         experiments: ['foo', 'bar']
@@ -217,8 +217,8 @@ describe('karka', function () {
         it('should test returning a valid map when some of the templates match', function () {
 
             context = {
-                stack: {
-                    head: {
+                res: {
+                    locals: {
                         locale: 'en_US',
                         device: 'tablet',
                         experiments: ['foo', 'bar']
