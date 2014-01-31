@@ -18,3 +18,13 @@ exports.create = function (config) {
         }
     });
 };
+
+exports.setSpecializationWrapperForEngine = function(config, engine) {
+    var mapper = specializer.templateMap(config);
+    return function(file, options, callback) {
+        //generate the specialization map
+        options._specialization =  mapper(options);
+
+        engine.apply(null, arguments);
+    }
+}
