@@ -66,13 +66,9 @@ describe('karka', function () {
     describe('Resolve', function () {
         var config,
             context = {
-                res: {
-                    locals: {
-                        locale: 'es_US',
-                        device: 'tablet',
-                        experiments: ['foo']
-                    }
-                }
+                locale: 'es_US',
+                device: 'tablet',
+                experiments: ['foo']
             },
             resolve;
 
@@ -134,9 +130,7 @@ describe('karka', function () {
                     }
                 ]
             },
-
-
-                resolve = specializer.templateResolve(config);
+            resolve = specializer.templateResolve(config);
             assert.equal('bar/partial1', resolve('partialSamples/partial1', context));
         });
     });
@@ -202,13 +196,9 @@ describe('karka', function () {
 
         it('should test returning empty map when none of the templates match', function () {
             context = {
-                res: {
-                    locals: {
-                        locale: 'en_AU',
-                        device: 'tablet',
-                        experiments: ['foo', 'bar']
-                    }
-                }
+                locale: 'en_AU',
+                device: 'tablet',
+                experiments: ['foo', 'bar']
             };
 
             mapper = specializer.templateMap(config);
@@ -217,13 +207,9 @@ describe('karka', function () {
         it('should test returning a valid map when some of the templates match', function () {
 
             context = {
-                res: {
-                    locals: {
-                        locale: 'en_US',
-                        device: 'tablet',
-                        experiments: ['foo', 'bar']
-                    }
-                }
+                locale: 'en_US',
+                device: 'tablet',
+                experiments: ['foo', 'bar']
             };
             mapper = specializer.templateMap(config);
             assert.deepEqual({"partialSamples/partial1":"bar/partial1","partialSamples/partial2":"bal/partial2","partialSamples/partial3":"bar/partial3"}, mapper(context));
