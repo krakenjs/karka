@@ -4,66 +4,7 @@ var specializer = require('../lib/specializer'),
 
 describe('karka', function () {
 
-    describe('Rule Evaluator', function () {
-
-        it('should test for simple no match case', function () {
-            var config = ['foo', 'bar'],
-                context = 'blah';
-
-            assert.equal(false, specializer.ruleEvaluate(config, context));
-        });
-
-        it('should test for simple matched case', function () {
-            var config = ['foo', 'bar'],
-                context = 'bar';
-
-            assert.equal(true, specializer.ruleEvaluate(config, context));
-        });
-
-        it('should test for match case', function () {
-            var config = ['foo'],
-                context = ['foo'];
-
-            assert.equal(true, specializer.ruleEvaluate(config, context));
-        });
-
-        it('should test for has complex but match simple entry case', function () {
-            var config = ['foo', ['bar', 'blah']],
-                context = ['foo', 'blah'];
-
-            assert.equal(true, specializer.ruleEvaluate(config, context));
-        });
-
-        it('should test for complex matched case', function () {
-            var config = ['foo', ['bar', 'blah']],
-                context = ['blah', 'bar'];
-
-            assert.equal(true, specializer.ruleEvaluate(config, context));
-        });
-
-        it('should test with simple no match case', function () {
-            var config = ['foo', 'bar', 'blah'],
-                context = ['blue', 'yellow'];
-
-            assert.equal(false, specializer.ruleEvaluate(config, context));
-        });
-
-        it('should test with complex no matched case', function () {
-            var config = ['foo', ['bar', 'blah']],
-                context = ['blue', 'yellow'];
-
-            assert.equal(false, specializer.ruleEvaluate(config, context));
-        });
-
-        it('should test negative cases where config is a string (not per spec)', function () {
-            var config = 'foo',
-                context = 'blah';
-
-            assert.equal(false, specializer.ruleEvaluate(config, context));
-        });
-
-    });
-    describe('Resolve', function () {
+    describe('Resolve Tests', function () {
         var config,
             context = {
                 locale: 'es_US',
@@ -133,9 +74,55 @@ describe('karka', function () {
             resolve = specializer.templateResolve(config);
             assert.equal('bar/partial1', resolve('partialSamples/partial1', context));
         });
+
+        it('should test simple no matched specialized template case', function () {
+            context.experiments = ['blah'];
+            resolve = specializer.templateResolve(config);
+            assert.equal('partialSamples/partial1', resolve('partialSamples/partial1', context));
+
+        });
+
+        it('should test for simple matched template case', function () {
+            context.experiments = ['foo'];
+            assert.equal('bar/partial1', resolve('partialSamples/partial1', context));
+        });
+
+        it('should test with complex no matched case', function () {
+            config['partialSamples/partial1'][1].rules.experiments = ['foo', ['bar', 'blah']],
+                context.experiments = ['blue', 'yellow'];
+            resolve = specializer.templateResolve(config);
+            assert.equal('partialSamples/partial1', resolve('partialSamples/partial1', context));
+        });
+
+        it('should test for complex matched case to resolve templates', function () {
+            config['partialSamples/partial1'][1].rules.experiments = ['foo', ['bar', 'blah']];
+            context.experiments = ['blah', 'bar'];
+            resolve = specializer.templateResolve(config);
+            assert.equal('bar/partial1', resolve('partialSamples/partial1', context));
+        });
+
+        it('should test for a simple match even when a complex entry is specified in config', function () {
+            context.experiments = ['foo', 'blah'];
+            assert.equal('bar/partial1', resolve('partialSamples/partial1', context));
+        });
+
+        it('should test cases where config is a non array and matches', function () {
+            config['partialSamples/partial1'][1].rules.isMonthOfAugust = true;
+            context.isMonthOfAugust = true;
+            resolve = specializer.templateResolve(config);
+            assert.equal('bar/partial1', resolve('partialSamples/partial1', context));
+        });
+
+        it('should test cases where config is a non array and failed to match', function () {
+            config['partialSamples/partial1'][1].rules.krakenIs = 'angryOctopus';
+            context.krakenIs = 'happyOctopus';
+            resolve = specializer.templateResolve(config);
+            assert.equal('partialSamples/partial1', resolve('partialSamples/partial1', context));
+        });
+
     });
 
-    describe('Map', function () {
+    describe('Map Tests', function () {
         var map,
             config = {
                 'partialSamples/partial1' : [
