@@ -199,7 +199,7 @@ describe('karka', function () {
                 experiments: ['foo', 'bar']
             };
             mapper = specializer.templateMap(config);
-            assert.deepEqual({"partialSamples/partial1":"bar/partial1","partialSamples/partial2":"bal/partial2","partialSamples/partial3":"bar/partial3"}, mapper(context));
+            assert.deepEqual({'partialSamples/partial1':'bar/partial1','partialSamples/partial2':'bal/partial2','partialSamples/partial3':'bar/partial3'}, mapper(context));
         });
     });
 });

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 module.exports = {
     ruleEvaluator: function ruleEvaluator(config, context, ruleEvalFnc) {
         return Object.keys(config.rules).every(function (key) {
