@@ -1,9 +1,10 @@
 'use strict';
-var specializer = require('./lib/specializer');
+var specializer = require('./lib/specializer'),
+    dust = require('dustjs-linkedin');
 
 exports.create = function (config) {
     var mapper = specializer.templateMap(config);
-
+    setUpDustOnLoadContext();
     return Object.create({
         templateResolver: specializer.templateResolve(config),
         templateMapper: function setSpecializationContext (req, res, next) {
@@ -26,5 +27,17 @@ exports.setSpecializationWrapperForEngine = function(config, engine) {
         options._specialization =  mapper(options);
 
         engine.apply(null, arguments);
+    }
+}
+
+
+function setUpDustOnLoadContext() {
+    var originalOnLoad = dust.onLoad,
+        specialization,
+        mappedName;
+    dust.OnLoad = function(name, context, cb) {
+        specialization = (typeof context.get === 'function' && context.get('_specialization')) || context._specialization;
+        mappedName = (specialization && specialization[name] || name);
+        originalLoad(mappedName, context, cb);
     }
 }
