@@ -35,7 +35,7 @@ function setUpDustOnLoadContext() {
     var originalOnLoad = dust.onLoad,
         specialization,
         mappedName;
-    dust.OnLoad = function onLoad (name, context, cb) {
+    dust.onLoad = function onLoad (name, context, cb) {
         specialization = (typeof context.get === 'function' && context.get('_specialization')) || context._specialization;
         mappedName = (specialization && specialization[name] || name);
         originalOnLoad(mappedName, context, cb);
