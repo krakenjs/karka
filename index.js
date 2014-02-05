@@ -39,10 +39,12 @@ function setUpDustOnLoadContext() {
         specialization = (typeof context.get === 'function' && context.get('_specialization')) || context._specialization;
         mappedName = (specialization && specialization[name] || name);
         originalOnLoad(mappedName, context, function(err, data) {
-            if(!err) {
-                dust.cache[name] = data;
+            if (!err && mappedName !== name && typeof data === 'string') {
+                //this is a workaround, since adaro is not aware of the mapped name up the chain
+                //we find the dust.register line and replace the mappedName of template with original name
+                data = data.replace(mappedName, name);
             }
-            cb.apply(undefined, arguments);
+            cb(err, data);
         });
     }
 }
