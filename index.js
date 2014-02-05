@@ -38,6 +38,11 @@ function setUpDustOnLoadContext() {
     dust.onLoad = function onLoad (name, context, cb) {
         specialization = (typeof context.get === 'function' && context.get('_specialization')) || context._specialization;
         mappedName = (specialization && specialization[name] || name);
-        originalOnLoad(mappedName, context, cb);
+        originalOnLoad(mappedName, context, function(err, data) {
+            if(!err) {
+                dust.cache[name] = data;
+            }
+            cb.apply(undefined, arguments);
+        });
     }
 }
