@@ -4,7 +4,6 @@ var specializer = require('./lib/specializer'),
 
 exports.create = function (config) {
     var mapper = specializer.templateMap(config);
-    setUpDustOnLoadContext();
     return Object.create({
         templateResolver: specializer.templateResolve(config),
         templateMapper: function setSpecializationContext (req, res, next) {
@@ -22,6 +21,7 @@ exports.create = function (config) {
 
 exports.setSpecializationWrapperForEngine = function(config, engine) {
     var mapper = specializer.templateMap(config);
+    setUpDustOnLoadContext();
     return function(file, options, callback) {
         //generate the specialization map
         options._specialization =  mapper(options);
