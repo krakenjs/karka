@@ -3,7 +3,7 @@ var specializer = require('./lib/specializer'),
     dust = require('dustjs-linkedin');
 
 exports.create = function (config) {
-    var mapper = specializer.templateMap(config);
+    var mapper = init(config);
     return Object.create({
         templateResolver: specializer.templateResolve(config),
         templateMapper: function setSpecializationContext (req, res, next) {
@@ -20,7 +20,7 @@ exports.create = function (config) {
 };
 
 exports.setSpecializationWrapperForEngine = function(config, engine) {
-    var mapper = specializer.templateMap(config);
+    var mapper = init(config);
     setUpDustOnLoadContext();
     return function(file, options, callback) {
         //generate the specialization map
@@ -30,6 +30,10 @@ exports.setSpecializationWrapperForEngine = function(config, engine) {
     }
 }
 
+function init(config) {
+    specializer.setUpShortStop();
+    return specializer.templateMap(config);
+}
 
 function setUpDustOnLoadContext() {
     var originalOnLoad = dust.onLoad,

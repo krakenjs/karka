@@ -1,0 +1,148 @@
+[
+    {
+        "config" : {
+            "partialSamples/partial1" : [
+                {
+                    "template": "foo/partial1",
+                    "use": "module:../test/fixtures/moduleAsRuleEvaluator",
+                    "rules": {
+                        "locale": ["en_US", "es_US"],
+                        "experiments": ["foo"],
+                        "device": ["tablet"]
+                    }
+                }
+            ]
+        },
+        "context" : {
+            "locale": "es_US",
+            "device": "tablet",
+            "experiments": ["foo"]
+        }
+    },
+    {
+        "config" : {
+            "partialSamples/partial1" : [
+                {
+                    "template": "foo/partial1",
+                    "use":"module::api:../test/fixtures/moduleAsRuleEvaluator::ruleEvaluator",
+                    "rules": {
+                        "locale": ["en_US", "es_US"],
+                        "experiments": ["foo"],
+                        "device": ["tablet"]
+                    }
+                }
+            ]
+        },
+        "context" : {
+            "locale": "es_US",
+            "device": "tablet",
+            "experiments" : ["foo"]
+        }
+    },
+    {
+        "config" : {
+            "partialSamples/partial1" : [
+                {
+                    "template": "foo/partial1",
+                    "use":"file:/test/fixtures/moduleAsRuleEvaluator",
+                    "rules": {
+                        "locale": ["en_US", "es_US"],
+                        "experiments": ["foo"],
+                        "device": ["tablet"]
+                    }
+                }
+            ]
+        },
+        "context" : {
+            "locale": "es_US",
+            "device": "tablet",
+            "experiments": ["foo"]
+        }
+    },
+    {
+        "config": {
+            "partialSamples/partial1" : [
+                {
+                    "template": "bal/partial1",
+                    "rules": {
+                        "locale": ["de_DE"],
+                        "experiments": ["foo"],
+                        "device": ["tablet"]
+                    }
+                },
+                {
+                    "template": "bar/partial1",
+                    "rules": {
+                        "locale": ["en_US", "es_US"],
+                        "experiments": ["foo"],
+                        "device": ["tablet"]
+                    }
+                }
+            ]
+        },
+        "context" : {
+            "locale": "es_US",
+            "device": "tablet",
+            "experiments": ["foo"]
+        }
+    },
+    {
+        "config": {
+            "partialSamples/partial1" : [
+                {
+                    "template": "bal/partial1",
+                    "rules": {
+                        "locale": ["de_DE"],
+                        "experiments": ["foo"],
+                        "device": ["tablet"]
+                    }
+                },
+                {
+                    "template": "bar/partial1",
+                    "rules": {
+                        "locale": ["en_US", "es_US"],
+                        "experiments": ["foo"],
+                        "device": ["tablet"]
+                    }
+                }
+            ],
+            "partialSamples/partial2" : [
+                {
+                    "template": "bal/partial2",
+                    "rules": {
+                        "locale": ["de_DE", "es_US", "en_US"],
+                        "experiments": ["foo"],
+                        "device": ["tablet"]
+                    }
+                },
+                {
+                    "template": "bar/partial2",
+                    "rules": {
+                        "locale": ["en_US", "es_US"],
+                        "experiments": [["bar", "bal"]],
+                        "device": ["tablet", "mobile"]
+                    }
+                }
+            ],
+            "partialSamples/partial3": [
+                {
+                    "template": "bal/partial3",
+                    "rules": {
+                        "locale": ["de_DE"],
+                        "experiments": ["foo"],
+                        "device": ["tablet"]
+                    }
+                },
+                {
+                    "template": "bar/partial3",
+                    "rules": {
+                        "locale": ["en_US", "es_US"],
+                        "device": ["tablet"]
+                    }
+                }
+            ]
+        }
+
+    }
+]
+

@@ -1,76 +1,33 @@
 var specializer = require('../lib/specializer'),
     assert = require('assert'),
+    testSet = require('./fixtures/testInputs.json'),
     mocha = require('mocha');
+specializer.setUpShortStop();
 
 describe('karka', function () {
 
     describe('Resolve Tests', function () {
-        var config,
-            context = {
-                locale: 'es_US',
-                device: 'tablet',
-                experiments: ['foo']
-            },
-            resolve;
+        var resolve, config, context;
 
         it('should test invoking module to rule Evaluate', function () {
-
-            config = {
-                'partialSamples/partial1' : [
-                    {
-                        template: 'foo/partial1',
-                        module: '../test/fixtures/moduleAsRuleEvaluator',
-                        rules: {
-                            locale: ['en_US', 'es_US'],
-                            experiments: ['foo'],
-                            device: ['tablet']
-                        }
-                    }
-                ]
-            };
-            resolve = specializer.templateResolve(config);
-            assert.equal('foo/partial1', resolve('partialSamples/partial1', context));
+            resolve = specializer.templateResolve(testSet[0].config);
+            assert.equal('foo/partial1', resolve('partialSamples/partial1', testSet[0].context));
         });
-        it('should test invoking factory method on module to rule Evaluate', function () {
 
-            config = {
-                'partialSamples/partial1' : [
-                    {
-                        template: 'bar/partial1',
-                        module: '../test/fixtures/factoryApiAsRuleEvaluator',
-                        api: 'ruleEvaluator',
-                        rules: {
-                            locale: ['en_US', 'es_US'],
-                            experiments: ['foo'],
-                            device: ['tablet']
-                        }
-                    }
-                ]
-            };
-            resolve = specializer.templateResolve(config);
-            assert.equal('bar/partial1', resolve('partialSamples/partial1', context));
+        it('should test invoking a factory API to rule Evaluate', function () {
+            resolve = specializer.templateResolve(testSet[1].config);
+            assert.equal('foo/partial1', resolve('partialSamples/partial1', testSet[1].context));
         });
+
+        it('should test invoking a file to rule Evaluate', function () {
+
+            resolve = specializer.templateResolve(testSet[2].config);
+            assert.equal('foo/partial1', resolve('partialSamples/partial1', testSet[2].context));
+        });
+
         it('should test in res.locals to rule Evaluate', function() {
-            config = {
-                'partialSamples/partial1' : [
-                    {
-                        template: 'bal/partial1',
-                        rules: {
-                            locale: ['de_DE'],
-                            experiments: ['foo'],
-                            device: ['tablet']
-                        }
-                    },
-                    {
-                        template: 'bar/partial1',
-                        rules: {
-                            locale: ['en_US', 'es_US'],
-                            experiments: ['foo'],
-                            device: ['tablet']
-                        }
-                    }
-                ]
-            },
+            config = testSet[3].config,
+            context = testSet[3].context,
             resolve = specializer.templateResolve(config);
             assert.equal('bar/partial1', resolve('partialSamples/partial1', context));
         });
@@ -124,61 +81,7 @@ describe('karka', function () {
 
     describe('Map Tests', function () {
         var map,
-            config = {
-                'partialSamples/partial1' : [
-                    {
-                        template: 'bal/partial1',
-                        rules: {
-                            locale: ['de_DE'],
-                            experiments: ['foo'],
-                            device: ['tablet']
-                        }
-                    },
-                    {
-                        template: 'bar/partial1',
-                        rules: {
-                            locale: ['en_US', 'es_US'],
-                            experiments: ['foo'],
-                            device: ['tablet']
-                        }
-                    }
-                ],
-                'partialSamples/partial2' : [
-                    {
-                        template: 'bal/partial2',
-                        rules: {
-                            locale: ['de_DE', 'es_US', 'en_US'],
-                            experiments: ['foo'],
-                            device: ['tablet']
-                        }
-                    },
-                    {
-                        template: 'bar/partial2',
-                        rules: {
-                            locale: ['en_US', 'es_US'],
-                            experiments: [['bar', 'bal']],
-                            device: ['tablet', 'mobile']
-                        }
-                    }
-                ],
-                'partialSamples/partial3': [
-                    {
-                        template: 'bal/partial3',
-                        rules: {
-                            locale: ['de_DE'],
-                            experiments: ['foo'],
-                            device: ['tablet']
-                        }
-                    },
-                    {
-                        template: 'bar/partial3',
-                        rules: {
-                            locale: ['en_US', 'es_US'],
-                            device: ['tablet']
-                        }
-                    }
-                ]
-            },
+            config = testSet[4].config,
             mapper;
 
         it('should test returning empty map when none of the templates match', function () {
