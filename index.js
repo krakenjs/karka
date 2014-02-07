@@ -1,41 +1,26 @@
 'use strict';
-var specializer = require('./lib/specializer'),
+var spclizer = require('./lib/specializer'),
     dust = require('dustjs-linkedin');
 
-exports.create = function (config) {
-    var mapper = init(config);
-    return Object.create({
-        templateResolver: specializer.templateResolve(config),
-        templateMapper: function setSpecializationContext (req, res, next) {
-            var context = {
-                req: req,
-                res: res
-            };
-            res.locals({
-                _specialization: mapper(context)
-            });
-            next();
-        }
-    });
+exports.create = function (config, engine) {
+    var specializer = spclizer.create(config);
+    return {
+        specializer: specializer,
+        renderer: (engine) ? getSpclWrapper(config, engine, specializer.templateMapper) : undefined
+    };
 };
 
-exports.setSpecializationWrapperForEngine = function(config, engine) {
-    var mapper = init(config);
-    setUpDustOnLoadContext();
+function getSpclWrapper (config, engine, mapper) {
+    setupDustOnLoad();
     return function(file, options, callback) {
         //generate the specialization map
         options._specialization =  mapper(options);
 
         engine.apply(null, arguments);
-    }
+    };
 }
 
-function init(config) {
-    specializer.setUpShortStop();
-    return specializer.templateMap(config);
-}
-
-function setUpDustOnLoadContext() {
+function setupDustOnLoad() {
     var originalOnLoad = dust.onLoad,
         specialization,
         mappedName;
