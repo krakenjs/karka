@@ -6,7 +6,7 @@ exports.create = function (config, engine) {
     var specializer = spclizer.create(config);
     return {
         specializer: specializer,
-        renderer: (engine) ? getSpclWrapper(config, engine, specializer.templateMapper) : undefined
+        renderer: (engine) ? getSpclWrapper(config, engine, specializer.mapper) : undefined
     };
 };
 
@@ -15,7 +15,6 @@ function getSpclWrapper (config, engine, mapper) {
     return function(file, options, callback) {
         //generate the specialization map
         options._specialization =  mapper(options);
-
         engine.apply(null, arguments);
     };
 }
