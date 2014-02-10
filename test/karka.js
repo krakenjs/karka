@@ -12,5 +12,6 @@ describe('Karka', function () {
         assert.equal(typeof karkaHelper.specializer.resolver, 'function');
         assert.equal(typeof karkaHelper.specializer.mapper, 'function');
         assert.equal(typeof karkaHelper.renderer, 'function');
+        assert.equal(typeof karkaHelper.renderer(function engine(){}), 'function');
     });
 });

@@ -2,21 +2,23 @@
 var spclizer = require('./lib/specializer'),
     dust = require('dustjs-linkedin');
 
-exports.create = function (config, engine) {
+exports.create = function (config) {
     var specializer = spclizer.create(config);
     return {
         specializer: specializer,
-        renderer: (engine) ? getSpclWrapper(config, engine, specializer.mapper) : undefined
+        renderer:  getSpclWrapper(config, specializer.mapper)
     };
 };
 
-function getSpclWrapper (config, engine, mapper) {
-    setupDustOnLoad();
-    return function(file, options, callback) {
-        //generate the specialization map
-        options._specialization =  mapper(options);
-        engine.apply(null, arguments);
-    };
+function getSpclWrapper (config, mapper) {
+    return function (engine) {
+        setupDustOnLoad();
+        return function(file, options, callback) {
+            //generate the specialization map
+            options._specialization =  mapper(options);
+            engine.apply(null, arguments);
+        };
+    }
 }
 
 function setupDustOnLoad() {
