@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "underscore": "~1.5.2",
-    "shortstop": "0.0.1"
+    "shortstop": "0.0.1",
+    "shortstop-handlers": "~0.1.0"
   },
   "devDependencies": {
     "mocha": "~1.9.0",
@@ -27,7 +28,7 @@
     "dustjs-helpers": "~1.1.1"
   },
   "peerDependencies": {
-     "dustjs-linkedin": "~2.0.0"
+    "dustjs-linkedin": "~2.0.0"
   },
   "scripts": {
     "test": "grunt test"

@@ -1,65 +1,37 @@
-[
-    {
+{
+    "testRequire" : {
         "config" : {
             "partialSamples/partial1" : [
                 {
                     "template": "foo/partial1",
-                    "use": "module:../test/fixtures/moduleAsRuleEvaluator",
+                    "use": "require:./test/fixtures/moduleAsRuleEvaluator",
                     "rules": {
-                        "locale": ["en_US", "es_US"],
-                        "experiments": ["foo"],
-                        "device": ["tablet"]
+                        "hakunamatata": "It-Means-No-Worries"
                     }
                 }
             ]
         },
         "context" : {
-            "locale": "es_US",
-            "device": "tablet",
-            "experiments": ["foo"]
+            "hakunamatata": "It-Means-No-Worries"
         }
     },
-    {
+    "testExec": {
         "config" : {
             "partialSamples/partial1" : [
                 {
                     "template": "foo/partial1",
-                    "use":"module::api:../test/fixtures/moduleAsRuleEvaluator::ruleEvaluator",
+                    "use":"exec:./test/fixtures/factoryApiAsRuleEvaluator#ruleEvaluator",
                     "rules": {
-                        "locale": ["en_US", "es_US"],
-                        "experiments": ["foo"],
-                        "device": ["tablet"]
+                        "hakunamatata": "It-Means-No-Worries"
                     }
                 }
             ]
         },
         "context" : {
-            "locale": "es_US",
-            "device": "tablet",
-            "experiments" : ["foo"]
+            "hakunamatata": "It-Means-No-Worries"
         }
     },
-    {
-        "config" : {
-            "partialSamples/partial1" : [
-                {
-                    "template": "foo/partial1",
-                    "use":"file:/test/fixtures/moduleAsRuleEvaluator",
-                    "rules": {
-                        "locale": ["en_US", "es_US"],
-                        "experiments": ["foo"],
-                        "device": ["tablet"]
-                    }
-                }
-            ]
-        },
-        "context" : {
-            "locale": "es_US",
-            "device": "tablet",
-            "experiments": ["foo"]
-        }
-    },
-    {
+    "testLocal": {
         "config": {
             "partialSamples/partial1" : [
                 {
@@ -86,7 +58,34 @@
             "experiments": ["foo"]
         }
     },
-    {
+    "testComplexLocal" : {
+        "config": {
+            "partialSamples/partial1" : [
+                {
+                    "template": "bal/partial1",
+                    "rules": {
+                        "kraken.is.angry.beware": true,
+                        "how.many.moods": ["happy", ["sad", "angry"]]
+                    }
+                }
+            ]
+        },
+        "context" : {
+            "kraken": {
+                "is": {
+                    "angry": {
+                        "beware": true
+                    }
+                }
+            },
+            "how": {
+                "many": {
+                    "moods": ["sad", "angry"]
+                }
+            }
+        }
+    },
+    "testResolveAll": {
         "config": {
             "partialSamples/partial1" : [
                 {
@@ -144,5 +143,5 @@
         }
 
     }
-]
+}
 

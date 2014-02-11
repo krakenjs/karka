@@ -6,11 +6,10 @@ var karka = require('../index'),
 describe('Karka', function () {
 
     it('should create a helper object on calling karka.create', function () {
-        var karkaHelper  = karka.create(testSet[0].config, function() {});
-        console.info(karkaHelper);
+        var karkaHelper  = karka.create(testSet['testRequire'].config, function() {});
         assert.equal(typeof karkaHelper.specializer, 'object');
-        assert.equal(typeof karkaHelper.specializer.resolver, 'function');
-        assert.equal(typeof karkaHelper.specializer.mapper, 'function');
+        assert.equal(typeof karkaHelper.specializer.resolve, 'function');
+        assert.equal(typeof karkaHelper.specializer.resolveAll, 'function');
         assert.equal(typeof karkaHelper.renderer, 'function');
         assert.equal(typeof karkaHelper.renderer(function engine(){}), 'function');
     });

@@ -6,7 +6,7 @@ exports.create = function (config) {
     var specializer = spclizer.create(config);
     return {
         specializer: specializer,
-        renderer:  getSpclWrapper(config, specializer.mapper)
+        renderer:  getSpclWrapper(config, specializer.resolveAll)
     };
 };
 

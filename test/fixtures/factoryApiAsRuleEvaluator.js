@@ -1,12 +1,8 @@
 'use strict';
 module.exports = {
-    ruleEvaluator: function ruleEvaluator(config, context, ruleEvalFnc) {
-        return Object.keys(config.rules).every(function (key) {
-            if (!context[key] ||
-                !ruleEvalFnc(config.rules[key], context[key])) {
-                return false;
-            }
-            return true;
-        });
+    ruleEvaluator: function () {
+        return function ruleEvaluator(config, context) {
+            return (config.rules.hakunamatata === context.hakunamatata);
+        };
     }
 };
