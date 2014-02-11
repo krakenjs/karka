@@ -79,6 +79,14 @@ describe('Specializer', function () {
             assert.equal('bal/partial1', spcl.resolve('partialSamples/partial1', context));
         });
 
+        it('should test cases where config is a spec like kraken.Is.Angry.beware and rules dont match', function () {
+            config = testSet['testComplexLocal'].config;
+            context = testSet['testComplexLocal'].context.kraken.is = 'happy';
+
+            spcl = specializer.create(config);
+            assert.equal('partialSamples/partial1', spcl.resolve('partialSamples/partial1', context));
+        });
+
     });
 
     describe('resolveAll Tests', function () {
