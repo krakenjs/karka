@@ -148,7 +148,7 @@ var config = {
                 'body': 'active'
             }
         },
-        'mood': 'jubilant
+        'mood': 'jubilant'
     };
 
     //if mood in context matches at least one of the moods in config along with other rules, the rule is a match
