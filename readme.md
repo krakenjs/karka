@@ -32,35 +32,168 @@ var karka = require('karka'),
     },
     spcl  = karka.create(config),
 
-    \\mappedName = 'bar'
+    //mappedName = 'bar'
     mappedName = spcl.resolve('foo', context),
 
-    \\maps = {'foo': 'bar', 'ying': 'yang'}
+    //maps = {'foo': 'bar', 'ying': 'yang'}
     maps = spcl.resolveAll(context);
 ```
-
 ##### Different ways to specify the config resolution:
 The above example assumes that the rule values are directly available in the context object. But fear not there are multiple ways the rules can be resolved.
 
 * If you would like to specify a module/file that custom implements the rule resolution (that can be resolved using require):
 ```javascript
-```
+var config = {
+    "foo" : [
+        {
+            "template": "bar",
+            "use": "require:./I/am/a/file",
+            "rules": {
+                "hakunamatata": "It-Means-No-Worries"
+            }
+        }
+    ]
+};
 
+//(or)
+
+var config = {
+    "foo" : [
+        {
+            "template": "bar",
+            "use": "require:I-am-a-module",
+            "rules": {
+                "hakunamatata": "It-Means-No-Worries"
+            }
+        }
+    ]
+};
+
+```
 * If you would like to specify a factory method in a module/file that does the rule resolution:
 ```javascript
+var config = {
+    "foo" : [
+        {
+            "template": "bar",
+            "use":"exec:./I/am/a/file#ruleEvaluator",
+            "rules": {
+                "hakunamatata": "It-Means-No-Worries"
+            }
+        }
+    ]
+};
 ```
-
-
 ##### Different ways to specify the context in config:
-
-* If you would like to specify the context in a nested object under the context objext:
+If you would like to
+* specify the context in a nested object under the context object:
 ```javascript
+var config = {
+            "ying" : [
+                {
+                    "template": "yang",
+                    "rules": {
+                        "state.of.mind.is": 'peaceful'
+                    }
+                }
+            ]
+    },
+    context  = {
+        "state": {
+            "of": {
+                "mind": {
+                    "is": 'peaceful
+                }
+            }
+        }
+    }
+```
+* specify multiple rules to be satisfied
+```javascript
+var config = {
+            "ying" : [
+                {
+                    "template": "yang",
+                    "rules": {
+                        "state.of.mind.is": 'peaceful',
+                        'state.of.body.is": 'active'
+                        'mood.is': 'happy'
+                    }
+                }
+            ]
+    };
+```
+* Specify multiple values for a rule in the config and want at least one value matched in your context
+```javascript
+var config = {
+        "ying" : [
+            {
+                "template": "yang",
+                "rules": {
+                    "state.of.mind": 'peaceful',
+                    'state.of.body": 'active'
+                    'mood': ['happy', 'elated', 'ecstatic', 'jubilant']
+                }
+            }
+        ]
+    },
+    context  = {
+        "state": {
+            "of": {
+                "mind": 'peaceful'
+            }
+        },
+        'state': {
+            'of': {
+                'body': 'active'
+            }
+        },
+        'mood': 'jubilant
+    };
+
+    //if mood in context matches at least one of the moods in config along with other rules, the rule is a match
+    //What the rule in the config means is state.of.mind AND state.of.body AND one of the values in mood need to be satisfied to map ying to yang.
 ```
 
-* If you would like to have multiple values for a rule in the config and want at least one value matched in your context
-```javascript
-```
 
 * If you would like to have multiple values for a rule in the config and you want to specify a complex and/or rule to match against your context
 ```javascript
+var config = {
+        "ying" : [
+            {
+                "template": "yang",
+                "rules": {
+                    "state.of.mind": 'peaceful',
+                    'state.of.body": 'active'
+                    'mood': [['happy', 'calm'], 'joyous']
+                }
+            },
+            {
+                "template": "bong",
+                "rules" : {
+                    "state.of.mind": 'peaceful',
+                    'state.of.body": 'active'
+                    'mood': [['jubilant', 'outrageous'],['ecstatic', crazy]]
+                }
+            }
+        ]
+    },
+    context  = {
+        "state": {
+            "of": {
+                "mind": 'peaceful'
+            }
+        },
+        'state': {
+            'of': {
+                'body': 'active'
+            }
+        },
+        'mood': ['jubilant', 'outrageous']
+    };
+
+    //In the above case context matches the rule that maps "ying" to "bong"
+    //What the above config means is:
+    //"ying" will resolve to "yang" when state.of.mind = peaceful AND state.of.body = 'active' AND mood = ('happy' AND 'calm') OR 'joyous
+    //"ying will resolve to "bong" when sate.of.mind = peaceful AND state.of.body = 'active' AND mood = ('jubilant' AND 'outrageous') OR ('ecstatic' AND 'crazy')
 ```
