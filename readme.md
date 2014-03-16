@@ -178,7 +178,7 @@ var config = {
                 'rules' : {
                     'state.of.mind': 'peaceful',
                     'state.of.body': 'active'
-                    'mood': [['jubilant', 'outrageous'],['ecstatic', crazy]]
+                    'mood': [['jubilant', 'outrageous'],['ecstatic', 'crazy']]
                 }
             }
         ]
