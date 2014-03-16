@@ -39,7 +39,7 @@ var karka = require('karka'),
     maps = spcl.resolveAll(context);
 ```
 
-As you can see a single key like 'foo' can be mapped to an array of values, each with their own rule set.
+As you can see a single key like 'foo' can be mapped to an array of possible matches, each with their own rule set.
 The first spec that has all rules satisfied the context will be picked. Simply put it matches with a swtich case mentality. SO it is important to remember to place the one with highest specifity on the top of the array.
 
 ##### Different ways to specify the config resolution:
