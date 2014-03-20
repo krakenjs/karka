@@ -22,12 +22,14 @@
     "grunt": "~0.4.2",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-jshint": "~0.8.0",
-    "grunt-simple-mocha": "~0.4.0"
+    "grunt-simple-mocha": "~0.4.0",
+    "istanbul": "~0.2.6"
   },
   "peerDependencies": {
     "dustjs-linkedin": "~2.0.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "cover": "istanbul cover _mocha -- test/*.js -R spec"
   }
 }
