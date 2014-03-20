@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "shortstop": "0.0.1",
-    "shortstop-handlers": "~0.1.0"
+    "shortstop-handlers": "~0.1.0",
+    "jshint": "~2.4.4"
   },
   "devDependencies": {
     "mocha": "~1.9.0",
@@ -23,13 +24,15 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-simple-mocha": "~0.4.0",
-    "istanbul": "~0.2.6"
+    "istanbul": "~0.2.6",
+    "jshint": "~2.4.4"
   },
   "peerDependencies": {
     "dustjs-linkedin": "~2.0.0"
   },
   "scripts": {
     "test": "grunt test",
-    "cover": "istanbul cover _mocha -- test/*.js -R spec"
+    "cover": "istanbul cover _mocha -- test/*.js -R spec",
+    "lint": "jshint -c .jshintrc index.js lib/"
   }
 }
