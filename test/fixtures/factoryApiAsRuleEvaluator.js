@@ -6,9 +6,9 @@ module.exports = {
         };
     },
 
-    ruleEvaluatorFalsy: function() {
+    ruleEvaluatorFalsy: function () {
         return function ruleEvaluatorFalsy() {
             return false;
-        }
+        };
     }
 };
