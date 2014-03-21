@@ -27,9 +27,6 @@
     "istanbul": "~0.2.6",
     "jshint": "~2.4.4"
   },
-  "peerDependencies": {
-    "dustjs-linkedin": "~2.0.0"
-  },
   "scripts": {
     "test": "grunt test",
     "cover": "istanbul cover _mocha -- test/*.js -R spec",
