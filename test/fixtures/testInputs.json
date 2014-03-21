@@ -31,6 +31,22 @@
             "hakunamatata": "It-Means-No-Worries"
         }
     },
+    "testExecFalsy": {
+        "config" : {
+            "partialSamples/partial1" : [
+                {
+                    "template": "foo/partial1",
+                    "use":"exec:./test/fixtures/factoryApiAsRuleEvaluator#ruleEvaluatorFalsy",
+                    "rules": {
+                        "hakunamatata": "It-Means-No-Worries"
+                    }
+                }
+            ]
+        },
+        "context" : {
+            "hakunamatata": "It-Means-No-Worries"
+        }
+    },
     "testLocal": {
         "config": {
             "partialSamples/partial1" : [

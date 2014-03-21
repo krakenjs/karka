@@ -87,6 +87,19 @@ describe('Specializer', function () {
             assert.equal('partialSamples/partial1', spcl.resolve('partialSamples/partial1', context));
         });
 
+        it('should test when the template is not in the specialization config', function () {
+            config = testSet['testComplexLocal'].config;
+            context = testSet['testComplexLocal'].context.kraken.is = 'happy';
+
+            spcl = specializer.create(config);
+            assert.equal('foo', spcl.resolve('foo', context));
+        });
+
+        it('should test invoking a factory API to rule Evaluate and return falsy', function () {
+            spcl = specializer.create(testSet['testExecFalsy'].config);
+            assert.equal('partialSamples/partial1', spcl.resolve('partialSamples/partial1', testSet['testExecFalsy'].context));
+        });
+
     });
 
     describe('resolveAll Tests', function () {
@@ -115,4 +128,5 @@ describe('Specializer', function () {
             assert.deepEqual({'partialSamples/partial1':'bar/partial1','partialSamples/partial2':'bal/partial2','partialSamples/partial3':'bar/partial3'}, spcl.resolveAll(context));
         });
     });
+
 });
