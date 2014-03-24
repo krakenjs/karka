@@ -15,7 +15,7 @@ node_modules
 npm-debug.log
 xunit.xml
 test/fixtures/.build
-
+coverage
 
 .project
 .idea
