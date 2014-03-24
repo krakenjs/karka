@@ -3,11 +3,11 @@
         "config" : {
             "partialSamples/partial1" : [
                 {
-                    "template": "foo/partial1",
-                    "use": "require:./test/fixtures/moduleAsRuleEvaluator",
-                    "rules": {
+                    "is": "foo/partial1",
+                    "when": {
                         "hakunamatata": "It-Means-No-Worries"
-                    }
+                    },
+                    "use": "require:./test/fixtures/moduleAsRuleEvaluator"
                 }
             ]
         },
@@ -19,11 +19,11 @@
         "config" : {
             "partialSamples/partial1" : [
                 {
-                    "template": "foo/partial1",
-                    "use":"exec:./test/fixtures/factoryApiAsRuleEvaluator#ruleEvaluator",
-                    "rules": {
+                    "is": "foo/partial1",
+                    "when": {
                         "hakunamatata": "It-Means-No-Worries"
-                    }
+                    },
+                    "use":"exec:./test/fixtures/factoryApiAsRuleEvaluator#ruleEvaluator"
                 }
             ]
         },
@@ -35,11 +35,11 @@
         "config" : {
             "partialSamples/partial1" : [
                 {
-                    "template": "foo/partial1",
-                    "use":"exec:./test/fixtures/factoryApiAsRuleEvaluator#ruleEvaluatorFalsy",
-                    "rules": {
+                    "is": "foo/partial1",
+                    "when": {
                         "hakunamatata": "It-Means-No-Worries"
-                    }
+                    },
+                    "use":"exec:./test/fixtures/factoryApiAsRuleEvaluator#ruleEvaluatorFalsy"
                 }
             ]
         },
@@ -51,16 +51,16 @@
         "config": {
             "partialSamples/partial1" : [
                 {
-                    "template": "bal/partial1",
-                    "rules": {
+                    "is": "bal/partial1",
+                    "when": {
                         "locale": ["de_DE"],
                         "experiments": ["foo"],
                         "device": ["tablet"]
                     }
                 },
                 {
-                    "template": "bar/partial1",
-                    "rules": {
+                    "is": "bar/partial1",
+                    "when": {
                         "locale": ["en_US", "es_US"],
                         "experiments": ["foo"],
                         "device": ["tablet"]
@@ -78,8 +78,8 @@
         "config": {
             "partialSamples/partial1" : [
                 {
-                    "template": "bal/partial1",
-                    "rules": {
+                    "is": "bal/partial1",
+                    "when": {
                         "kraken.is.angry.beware": true,
                         "how.many.moods": ["happy", ["sad", "angry"]]
                     }
@@ -105,16 +105,16 @@
         "config": {
             "partialSamples/partial1" : [
                 {
-                    "template": "bal/partial1",
-                    "rules": {
+                    "is": "bal/partial1",
+                    "when": {
                         "locale": ["de_DE"],
                         "experiments": ["foo"],
                         "device": ["tablet"]
                     }
                 },
                 {
-                    "template": "bar/partial1",
-                    "rules": {
+                    "is": "bar/partial1",
+                    "when": {
                         "locale": ["en_US", "es_US"],
                         "experiments": ["foo"],
                         "device": ["tablet"]
@@ -123,16 +123,16 @@
             ],
             "partialSamples/partial2" : [
                 {
-                    "template": "bal/partial2",
-                    "rules": {
+                    "is": "bal/partial2",
+                    "when": {
                         "locale": ["de_DE", "es_US", "en_US"],
                         "experiments": ["foo"],
                         "device": ["tablet"]
                     }
                 },
                 {
-                    "template": "bar/partial2",
-                    "rules": {
+                    "is": "bar/partial2",
+                    "when": {
                         "locale": ["en_US", "es_US"],
                         "experiments": [["bar", "bal"]],
                         "device": ["tablet", "mobile"]
@@ -141,16 +141,16 @@
             ],
             "partialSamples/partial3": [
                 {
-                    "template": "bal/partial3",
-                    "rules": {
+                    "is": "bal/partial3",
+                    "when": {
                         "locale": ["de_DE"],
                         "experiments": ["foo"],
                         "device": ["tablet"]
                     }
                 },
                 {
-                    "template": "bar/partial3",
-                    "rules": {
+                    "is": "bar/partial3",
+                    "when": {
                         "locale": ["en_US", "es_US"],
                         "device": ["tablet"]
                     }

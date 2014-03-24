@@ -1,7 +1,7 @@
 {
   "name": "karka",
   "version": "0.0.1",
-  "description": "A module to help with template specialization",
+  "description": "A simple rule parser",
   "main": "index.js",
   "keywords": [
     "dustjs",

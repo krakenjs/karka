@@ -39,14 +39,14 @@ describe('Specializer', function () {
         });
 
         it('should test with complex no matched case', function () {
-            config['partialSamples/partial1'][1].rules.experiments = ['foo', ['bar', 'blah']],
+            config['partialSamples/partial1'][1].when.experiments = ['foo', ['bar', 'blah']],
             context.experiments = ['blue', 'yellow'];
             spcl = specializer.create(config);
             assert.equal('partialSamples/partial1', spcl.resolve('partialSamples/partial1', context));
         });
 
         it('should test for complex matched case to resolve templates', function () {
-            config['partialSamples/partial1'][1].rules.experiments = ['foo', ['bar', 'blah']];
+            config['partialSamples/partial1'][1].when.experiments = ['foo', ['bar', 'blah']];
             context.experiments = ['blah', 'bar'];
             spcl = specializer.create(config);
             assert.equal('bar/partial1', spcl.resolve('partialSamples/partial1', context));
@@ -58,14 +58,14 @@ describe('Specializer', function () {
         });
 
         it('should test cases where config is a non array and matches', function () {
-            config['partialSamples/partial1'][1].rules.isMonthOfAugust = true;
+            config['partialSamples/partial1'][1].when.isMonthOfAugust = true;
             context.isMonthOfAugust = true;
             spcl = specializer.create(config);
             assert.equal('bar/partial1', spcl.resolve('partialSamples/partial1', context));
         });
 
         it('should test cases where config is a non array and failed to match', function () {
-            config['partialSamples/partial1'][1].rules.krakenIs = 'angryOctopus';
+            config['partialSamples/partial1'][1].when.krakenIs = 'angryOctopus';
             context.krakenIs = 'happyOctopus';
             spcl = specializer.create(config);
             assert.equal('partialSamples/partial1', spcl.resolve('partialSamples/partial1', context));

@@ -10,16 +10,16 @@ var karka = require('karka'),
     config = {
         'foo' : [
             {
-                'template': 'bar',
-                'rules': {
+                'is': 'bar',
+                'when': {
                     'hakunamatata': 'It-Means-No-Worries'
                 }
             }
         ],
         'ying': [
             {
-                'template': 'yang',
-                'rules': {
+                'is': 'yang',
+                'when': {
                     'secret': 'There-Is-None'
                 }
             }
@@ -51,11 +51,11 @@ But fear not there are multiple ways the rules can be resolved.
 var config = {
     'foo' : [
         {
-            'template': 'bar',
-            'use': 'require:./I/am/a/file',
-            'rules': {
+            'is': 'bar',
+            'when': {
                 'hakunamatata': 'It-Means-No-Worries'
-            }
+            },
+            'use': 'require:./I/am/a/file'
         }
     ]
 };
@@ -65,11 +65,11 @@ var config = {
 var config = {
     'foo' : [
         {
-            'template': 'bar',
-            'use': 'require:I-am-a-module',
-            'rules': {
+            'is': 'bar',
+            'when': {
                 'hakunamatata': 'It-Means-No-Worries'
-            }
+            },
+            'use': 'require:I-am-a-module'
         }
     ]
 };
@@ -80,9 +80,9 @@ var config = {
 var config = {
     'foo' : [
         {
-            'template': 'bar',
+            'is': 'bar',
             'use':'exec:./I/am/a/file#ruleEvaluator',
-            'rules': {
+            'when': {
                 'hakunamatata': 'It-Means-No-Worries'
             }
         }
@@ -95,8 +95,8 @@ var config = {
 var config = {
         'ying' : [
             {
-                'template': 'yang',
-                'rules': {
+                'is': 'yang',
+                'when': {
                     'state.of.mind.is': 'peaceful'
                 }
             }
@@ -117,8 +117,8 @@ var config = {
 var config = {
         'ying' : [
             {
-                'template': 'yang',
-                'rules': {
+                'is': 'yang',
+                'when': {
                     'state.of.mind.is': 'peaceful',
                     'state.of.body.is': 'active',
                     'mood.is': 'happy'
@@ -132,8 +132,8 @@ var config = {
 var config = {
         'ying' : [
             {
-                'template': 'yang',
-                'rules': {
+                'is': 'yang',
+                'when': {
                     'state.of.mind': 'peaceful',
                     'state.of.body': 'active'
                     'mood': ['happy', 'elated', 'ecstatic', 'jubilant']
@@ -170,16 +170,16 @@ var config = {
 var config = {
         'ying' : [
             {
-                'template': 'yang',
-                'rules': {
+                'is': 'yang',
+                'when': {
                     'state.of.mind': 'peaceful',
                     'state.of.body': 'active',
                     'mood': [['happy', 'calm'], 'joyous']
                 }
             },
             {
-                'template': 'bong',
-                'rules' : {
+                'is': 'bong',
+                'when' : {
                     'state.of.mind': 'peaceful',
                     'state.of.body': 'active'
                     'mood': [['jubilant', 'outrageous'],['ecstatic', 'crazy']]
