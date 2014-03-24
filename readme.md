@@ -81,10 +81,10 @@ var config = {
     'foo' : [
         {
             'is': 'bar',
-            'use':'exec:./I/am/a/file#ruleEvaluator',
             'when': {
                 'hakunamatata': 'It-Means-No-Worries'
-            }
+            },
+            'use':'exec:./I/am/a/file#ruleEvaluator'
         }
     ]
 };

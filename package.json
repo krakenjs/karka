@@ -8,6 +8,10 @@
     "express",
     "nodejs"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krakenjs/karka.git"
+  },
   "author": {
     "name": "Poornima Venkatakrishnan",
     "email": "pvenkatakrishnan@paypal.com"
