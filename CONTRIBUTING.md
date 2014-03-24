@@ -1,4 +1,4 @@
-# Contributing To kraken-js
+# Contributing To karka
 
 We are always looking for ways to make our modules better. Adding features and fixing bugs allows everyone who depends
 on this code to create better, more stable applications.
