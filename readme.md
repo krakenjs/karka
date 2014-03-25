@@ -1,4 +1,4 @@
-A simple rule parsing module [![Build Status](https://travis-ci.org/paypal/kraken-js.png)](https://travis-ci.org/pvenkatakrishnan/karka)
+A simple rule parsing module [![Build Status](https://travis-ci.org/paypal/kraken-js.png)](https://travis-ci.org/krakenjs/karka)
 ============================
 
 Given a rule in a specified format, the context (in which the rule matching is invoked), this module will resolve a key to a value if the context satisifes the rules.
