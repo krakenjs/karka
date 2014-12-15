@@ -1,7 +1,11 @@
-A simple rule parsing module [![Build Status](https://api.travis-ci.org/krakenjs/karka.png)](https://travis-ci.org/krakenjs/karka)
-============================
+karka
+=====
 
-Given a rule in a specified format, the context (in which the rule matching is invoked), this module will resolve a key to a value if the context satisifes the rules.
+Lead Maintainer: [Poornima Venkat](https://github.com/pvenkatakrishnan/)  
+
+[![Build Status](https://travis-ci.org/krakenjs/karka.svg?branch=master)](https://travis-ci.org/krakenjs/karka)  
+
+A simple rule parsing module. Given a rule in a specified format, the context (in which the rule matching is invoked), this module will resolve a key to a value if the context satisifes the rules.
 
 A simple usage:
 
