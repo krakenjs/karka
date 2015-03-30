@@ -18,8 +18,7 @@
   },
   "dependencies": {
     "shortstop": "0.0.1",
-    "shortstop-handlers": "~0.1.0",
-    "jshint": "~2.4.4"
+    "shortstop-handlers": "~0.1.0"
   },
   "devDependencies": {
     "mocha": "~1.9.0",
