@@ -17,6 +17,7 @@
     "email": "pvenkatakrishnan@paypal.com"
   },
   "dependencies": {
+    "aproba": "^1.0.1",
     "shortstop": "0.0.1",
     "shortstop-handlers": "~0.1.0"
   },
