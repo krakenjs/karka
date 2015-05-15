@@ -129,4 +129,23 @@ describe('Specializer', function () {
         });
     });
 
+    describe('argument validation', function () {
+        it('throws when passed no arguments', function () {
+            try {
+                specializer.create();
+                assert.fail();
+            } catch (e) {
+                assert.equal(e.code, 'EMISSINGARG');
+            }
+        });
+        it('throws when passed bad arguments', function () {
+            try {
+                specializer.create([]);
+                assert.fail();
+            } catch (e) {
+                assert.equal(e.code, 'EINVALIDTYPE');
+            }
+        });
+    });
+
 });
