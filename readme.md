@@ -1,7 +1,7 @@
 karka
 =====
 
-Lead Maintainer: [Poornima Venkat](https://github.com/pvenkatakrishnan/)  
+Lead Maintainer: [Matt Edelman](https://github.com/grawk)  
 
 [![Build Status](https://travis-ci.org/krakenjs/karka.svg?branch=master)](https://travis-ci.org/krakenjs/karka)  
 
